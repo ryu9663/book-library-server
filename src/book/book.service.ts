@@ -33,8 +33,10 @@ export class BookService {
   }
 
   async update(id: number, updateBookDto: UpdateBookDto) {
-    await this.findOne(id); // 없으면 NotFoundException
-    return this.bookRepository.update(id, updateBookDto);
+    const book = await this.findOne(id); // 없으면 NotFoundException
+    Object.assign(book, updateBookDto);
+
+    return this.bookRepository.save(book);
   }
 
   async remove(id: number) {
