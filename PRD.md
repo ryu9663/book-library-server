@@ -19,31 +19,31 @@
 
 #### Entity
 
-| 필드        | 타입    | 설명                   |
-| ----------- | ------- | ---------------------- |
-| id          | number  | PK, 자동 생성          |
-| title       | string  | 책 제목                |
-| author      | string  | 저자                   |
-| isbn        | string  | ISBN                   |
-| isAvailable | boolean | 대출 가능 여부 (true)  |
+| 필드        | 타입    | 설명                  |
+| ----------- | ------- | --------------------- |
+| id          | number  | PK, 자동 생성         |
+| title       | string  | 책 제목               |
+| author      | string  | 저자                  |
+| isbn        | string  | ISBN                  |
+| isAvailable | boolean | 대출 가능 여부 (true) |
 
 #### API
 
-| 메서드 | 경로       | 설명         |
-| ------ | ---------- | ------------ |
-| POST   | /books     | 책 등록      |
-| GET    | /books     | 전체 조회    |
-| GET    | /books/:id | 단일 조회    |
-| PATCH  | /books/:id | 수정         |
-| DELETE | /books/:id | 삭제         |
+| 메서드 | 경로       | 설명      |
+| ------ | ---------- | --------- |
+| POST   | /books     | 책 등록   |
+| GET    | /books     | 전체 조회 |
+| GET    | /books/:id | 단일 조회 |
+| PATCH  | /books/:id | 수정      |
+| DELETE | /books/:id | 삭제      |
 
 #### Validation
 
-| 필드   | 규칙                     |
-| ------ | ------------------------ |
-| title  | 필수, 1~100자            |
-| author | 필수, 1자 이상           |
-| isbn   | 필수, ISBN 형식          |
+| 필드   | 규칙            |
+| ------ | --------------- |
+| title  | 필수, 1~100자   |
+| author | 필수, 1자 이상  |
+| isbn   | 필수, ISBN 형식 |
 
 ---
 
@@ -51,22 +51,22 @@
 
 #### Entity
 
-| 필드      | 타입   | 설명              |
-| --------- | ------ | ----------------- |
-| id        | number | PK                |
-| name      | string | 이름              |
-| email     | string | 이메일 (unique)   |
-| createdAt | Date   | 가입일            |
+| 필드      | 타입   | 설명            |
+| --------- | ------ | --------------- |
+| id        | number | PK              |
+| name      | string | 이름            |
+| email     | string | 이메일 (unique) |
+| createdAt | Date   | 가입일          |
 
 #### API
 
-| 메서드 | 경로       | 설명         |
-| ------ | ---------- | ------------ |
-| POST   | /users     | 회원 등록    |
-| GET    | /users     | 전체 조회    |
-| GET    | /users/:id | 단일 조회    |
-| PATCH  | /users/:id | 수정         |
-| DELETE | /users/:id | 삭제         |
+| 메서드 | 경로       | 설명      |
+| ------ | ---------- | --------- |
+| POST   | /users     | 회원 등록 |
+| GET    | /users     | 전체 조회 |
+| GET    | /users/:id | 단일 조회 |
+| PATCH  | /users/:id | 수정      |
+| DELETE | /users/:id | 삭제      |
 
 ---
 
@@ -74,22 +74,22 @@
 
 #### Entity
 
-| 필드       | 타입   | 설명           |
-| ---------- | ------ | -------------- |
-| id         | number | PK             |
-| userId     | number | FK (User)      |
-| bookId     | number | FK (Book)      |
-| borrowedAt | Date   | 대출 일시      |
+| 필드       | 타입   | 설명                 |
+| ---------- | ------ | -------------------- |
+| id         | number | PK                   |
+| userId     | number | FK (User)            |
+| bookId     | number | FK (Book)            |
+| borrowedAt | Date   | 대출 일시            |
 | returnedAt | Date   | 반납 일시 (nullable) |
 
 #### API
 
-| 메서드 | 경로              | 설명                   |
-| ------ | ----------------- | ---------------------- |
-| POST   | /loans            | 대출 신청              |
-| PATCH  | /loans/:id/return | 반납 처리              |
-| GET    | /loans            | 대출 목록              |
-| GET    | /users/:id/loans  | 특정 회원 대출 이력    |
+| 메서드 | 경로              | 설명                |
+| ------ | ----------------- | ------------------- |
+| POST   | /loans            | 대출 신청           |
+| PATCH  | /loans/:id/return | 반납 처리           |
+| GET    | /loans            | 대출 목록           |
+| GET    | /users/:id/loans  | 특정 회원 대출 이력 |
 
 ---
 
