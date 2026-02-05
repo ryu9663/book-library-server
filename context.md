@@ -27,18 +27,27 @@ NestJS + TypeORM + PostgreSQL 기반의 도서관 관리 REST API
 
 ### API 엔드포인트
 
-| 메서드 | 경로      | 설명         |
-| ------ | --------- | ------------ |
-| POST   | /book     | 책 등록      |
-| GET    | /book     | 전체 책 조회 |
-| GET    | /book/:id | 특정 책 조회 |
-| PATCH  | /book/:id | 책 수정      |
-| DELETE | /book/:id | 책 삭제      |
+| 메서드 | 경로       | 설명         |
+| ------ | ---------- | ------------ |
+| POST   | /books     | 책 등록      |
+| GET    | /books     | 전체 책 조회 |
+| GET    | /books/:id | 특정 책 조회 |
+| PATCH  | /books/:id | 책 수정      |
+| DELETE | /books/:id | 책 삭제      |
+
+### DTO Validation
+
+| 필드   | 규칙                           |
+| ------ | ------------------------------ |
+| title  | 최소 1자, 최대 100자           |
+| author | 최소 1자                       |
+| isbn   | ISBN 형식 (예: 978-3-16-148410-0) |
 
 ## 테스트 전략
 
 - **방식**: TDD with Jest
 - **Repository Mocking**: `getRepositoryToken(Entity)` 사용
+- **DTO Validation**: `validate()` 함수로 직접 테스트
 - **원칙**: Service는 실제 로직 테스트, Repository만 Mock
 
 ## 개발 명령어
@@ -53,10 +62,12 @@ pnpm test:watch    # 테스트 watch 모드
 ## 미구현 기능 (TODO)
 
 - [ ] Loan Entity (대출 기능)
-- [ ] DTO Validation (class-validator)
+- [x] DTO Validation (class-validator) ✅
 - [ ] Error Handling
-- [ ] Swagger 문서화
+- [x] Swagger 문서화 ✅
 - [ ] 프로덕션용 migration 설정
+- [ ] UpdateBookDto 유효성 검사 테스트
+- [ ] E2E 테스트
 
 ## 주의 사항
 
