@@ -34,6 +34,10 @@ export class BookService {
 
   async update(id: number, updateBookDto: UpdateBookDto) {
     const book = await this.findOne(id); // 없으면 NotFoundException
+    const isDTOEmpty = Object.keys(updateBookDto).length === 0;
+    if (isDTOEmpty) {
+      return book;
+    }
     Object.assign(book, updateBookDto);
 
     return this.bookRepository.save(book);
