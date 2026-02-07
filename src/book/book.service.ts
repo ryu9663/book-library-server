@@ -12,7 +12,8 @@ export class BookService {
     private bookRepository: Repository<Book>,
   ) {}
   async create(createBookDto: CreateBookDto) {
-    const book = this.bookRepository.create(createBookDto);
+    const thumbnail = `https://covers.openlibrary.org/b/isbn/${createBookDto.isbn}-M.jpg`;
+    const book = this.bookRepository.create({ ...createBookDto, thumbnail });
     return await this.bookRepository.save(book);
   }
 

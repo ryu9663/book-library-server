@@ -18,4 +18,7 @@ export class Book extends AbstractEntity {
 
   @OneToMany(() => Loan, (loan) => loan.book)
   loans: Loan[];
+
+  @Column({ nullable: true })
+  thumbnail: string;
 }

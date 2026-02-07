@@ -18,6 +18,7 @@ describe('UsersService', () => {
         email: 'jjangkoo@gmail.com',
         createdAt: new Date('2024-01-01'),
         updatedAt: new Date('2024-01-01'),
+        loans: [],
       },
     ];
     newUser = {
@@ -26,6 +27,7 @@ describe('UsersService', () => {
       email: 'ryu9663@naver.com',
       createdAt: new Date(),
       updatedAt: new Date(),
+      loans: [],
     };
     mockRepository = {
       find: jest.fn(),

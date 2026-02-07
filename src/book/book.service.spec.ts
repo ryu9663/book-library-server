@@ -4,13 +4,14 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Book } from './entities/book.entity';
 import { NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import { mockBooks } from 'src/contants/mock';
 
 describe('BookService', () => {
   let service: BookService;
   let mockRepository: jest.Mocked<Repository<Book>>;
-  let mockBooks: Book[];
 
   beforeEach(async () => {
+    jest.clearAllMocks();
     mockRepository = {
       find: jest.fn(),
 
@@ -20,27 +21,6 @@ describe('BookService', () => {
       update: jest.fn(),
       delete: jest.fn(),
     } as any;
-
-    mockBooks = [
-      {
-        id: 1,
-        title: '해리포터',
-        author: 'J.K. 롤링',
-        isbn: '978-3-16-148410-0',
-        isAvailable: true,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-01'),
-      },
-      {
-        id: 2,
-        title: '반지의 제왕',
-        author: '톨킨',
-        isbn: '978-3-16-148410-1',
-        createdAt: new Date('2024-02-01'),
-        updatedAt: new Date('2024-02-01'),
-        isAvailable: true,
-      },
-    ];
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -70,7 +50,7 @@ describe('BookService', () => {
   });
 
   describe('책 등록 (book create)', () => {
-    it('should create a book', async () => {
+    it('책이 등록될때 isbn에 맞는 썸네일이 함께 등록된다.', async () => {
       const dto = {
         title: '제3의 책',
         author: '제3의 저자',
@@ -79,21 +59,36 @@ describe('BookService', () => {
 
       mockRepository.create.mockReturnValue({
         ...dto,
-        ...{ id: 3, isAvailable: true },
+        ...{
+          id: 3,
+          isAvailable: true,
+          thumbnail: `https://covers.openlibrary.org/b/isbn/${dto.isbn}-M.jpg`,
+        },
       } as any);
       mockRepository.save.mockResolvedValue({
         ...dto,
-        ...{ id: 3, isAvailable: true },
+        ...{
+          id: 3,
+          isAvailable: true,
+          thumbnail: `https://covers.openlibrary.org/b/isbn/${dto.isbn}-M.jpg`,
+        },
       } as any);
 
       const result = await service.create(dto);
 
-      expect(mockRepository.create).toHaveBeenCalledWith(dto);
+      expect(mockRepository.create).toHaveBeenCalledWith({
+        ...dto,
+        thumbnail: `https://covers.openlibrary.org/b/isbn/${dto.isbn}-M.jpg`,
+      });
       expect(mockRepository.save).toHaveBeenCalled();
 
       expect(result).toEqual({
         ...dto,
-        ...{ id: 3, isAvailable: true },
+        ...{
+          id: 3,
+          isAvailable: true,
+          thumbnail: `https://covers.openlibrary.org/b/isbn/${dto.isbn}-M.jpg`,
+        },
       });
     });
   });
