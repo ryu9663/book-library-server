@@ -19,10 +19,13 @@ import {
 
 const BOOK_EXAMPLE = {
   id: 1,
-  title: '해리포터',
-  author: 'J.K. 롤링',
-  isbn: '978-3-16-148410-0',
-  isAvailable: true,
+  createdAt: '2026-02-07T08:27:59.309Z',
+  updatedAt: '2026-02-07T12:35:12.112Z',
+  title: 'Harry Potter',
+  author: 'J.K. Rowling',
+  isbn: '9788983927620',
+  isAvailable: false,
+  thumbnail: 'https://covers.openlibrary.org/b/isbn/9788983927620-M.jpg',
 };
 
 @Controller('books')
