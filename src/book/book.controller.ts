@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -56,8 +57,8 @@ export class BookController {
       error: 'Not Found',
     },
   })
-  findOne(@Param('id') id: string) {
-    return this.bookService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.bookService.findOne(id);
   }
 
   @Patch(':id')
@@ -76,8 +77,11 @@ export class BookController {
       error: 'Not Found',
     },
   })
-  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
-    return this.bookService.update(+id, updateBookDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateBookDto: UpdateBookDto,
+  ) {
+    return this.bookService.update(id, updateBookDto);
   }
 
   @Delete(':id')
@@ -93,7 +97,7 @@ export class BookController {
       error: 'Not Found',
     },
   })
-  remove(@Param('id') id: string) {
-    return this.bookService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.bookService.remove(id);
   }
 }

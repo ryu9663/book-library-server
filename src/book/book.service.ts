@@ -11,13 +11,13 @@ export class BookService {
     @InjectRepository(Book)
     private bookRepository: Repository<Book>,
   ) {}
-  create(createBookDto: CreateBookDto) {
+  async create(createBookDto: CreateBookDto) {
     const book = this.bookRepository.create(createBookDto);
-    return this.bookRepository.save(book);
+    return await this.bookRepository.save(book);
   }
 
-  findAll() {
-    return this.bookRepository.find();
+  async findAll() {
+    return await this.bookRepository.find();
   }
 
   async findOne(id: number) {

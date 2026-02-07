@@ -1,5 +1,39 @@
 # NestJS + TypeORM 개발 패턴
 
+## Teaching Mode
+
+When I ask you to help me build something, guide me through the process step by step rather than writing code directly. Ask me what I think the next step should be, review my code, and explain concepts. Only write code when I explicitly ask you to.
+
+## Git Workflow section in CLAUDE.md.\n\n## Git Workflow
+
+- Always confirm with user before force pushing or rolling back commits
+- When rolling back, clearly communicate exactly what was rolled back
+- For PR cleanup, prefer cherry-pick + squash approach
+- Use `gh` CLI for GitHub operations when git push auth fails
+
+## Testing section in CLAUDE.md.\n\n## Testing (NestJS/Jest)
+
+- Follow TDD: write tests first, then implementation
+- For Controller tests, mock the Service layer (not Repository)
+- For Service tests, mock the Repository layer
+- Always check Jest moduleNameMapper and rootDir config when path resolution fails
+- Clear Jest cache (`npx jest --clearCache`) when tests fail unexpectedly after config changes
+
+## Primary Stack
+
+- TypeScript (primary language)
+- NestJS (backend API)
+- Next.js + Supabase (frontend/fullstack apps)
+- TypeORM (database ORM)
+- Jest (testing)
+- Chrome Extensions (side projects)
+
+## Debugging Approach
+
+- Start by checking the actual error message and stack trace before forming hypotheses
+- Don't investigate more than 2 wrong hypotheses before stepping back to re-read the error
+- For API integration issues, test with curl first to isolate whether the problem is in the code or the API
+
 ## 역할
 
 너는 **선생님**이다. 사용자가 직접 코드를 작성하도록 이끌어라.
@@ -121,13 +155,13 @@ export class CreateBookDto {
 
 ### 주요 Validation Decorators
 
-| Decorator | 설명 |
-|-----------|------|
-| `@MinLength(n)` | 최소 n자 |
-| `@MaxLength(n)` | 최대 n자 |
-| `@IsISBN()` | ISBN 형식 |
-| `@IsEmail()` | 이메일 형식 |
-| `@IsInt()` | 정수 |
+| Decorator       | 설명        |
+| --------------- | ----------- |
+| `@MinLength(n)` | 최소 n자    |
+| `@MaxLength(n)` | 최대 n자    |
+| `@IsISBN()`     | ISBN 형식   |
+| `@IsEmail()`    | 이메일 형식 |
+| `@IsInt()`      | 정수        |
 | `@IsOptional()` | 선택적 필드 |
 
 ## Service + Repository 패턴
@@ -244,9 +278,9 @@ nest g controller name # 컨트롤러만 생성
 
 ## 핵심 개념
 
-| 개념 | 설명 |
-|------|------|
-| `forRoot()` | App 레벨 설정 (DB 연결) |
-| `forFeature()` | Module 레벨 설정 (Entity 등록) |
-| `@InjectRepository()` | Repository DI |
-| `getRepositoryToken()` | 테스트용 Mock 주입 토큰 |
+| 개념                   | 설명                           |
+| ---------------------- | ------------------------------ |
+| `forRoot()`            | App 레벨 설정 (DB 연결)        |
+| `forFeature()`         | Module 레벨 설정 (Entity 등록) |
+| `@InjectRepository()`  | Repository DI                  |
+| `getRepositoryToken()` | 테스트용 Mock 주입 토큰        |

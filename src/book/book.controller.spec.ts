@@ -14,12 +14,16 @@ describe('BookController', () => {
       author: 'J.K. 롤링',
       isbn: '978-3-16-148410-0',
       isAvailable: true,
+      createdAt: new Date('2024-01-01'),
+      updatedAt: new Date('2024-01-01'),
     },
     {
       id: 2,
       title: '반지의 제왕',
       author: '톨킨',
       isbn: '978-3-16-148410-1',
+      createdAt: new Date('2024-02-01'),
+      updatedAt: new Date('2024-02-01'),
       isAvailable: true,
     },
   ];
@@ -64,7 +68,7 @@ describe('BookController', () => {
       mockBookService.findOne.mockResolvedValue(mockBooks[0]);
 
       // Act
-      const result = await controller.findOne('1');
+      const result = await controller.findOne(1);
 
       // Assert
       expect(mockBookService.findOne).toHaveBeenCalledWith(1);
@@ -79,7 +83,7 @@ describe('BookController', () => {
         title: '수정된 책이름',
       });
 
-      const result = await controller.update('1', {
+      const result = await controller.update(1, {
         title: '수정된 책이름',
       });
 
@@ -97,7 +101,7 @@ describe('BookController', () => {
     it('bookService.remove 호출 결과 반환', async () => {
       mockBookService.remove.mockResolvedValue({ raw: [], affected: 1 });
 
-      const result = await controller.remove('1');
+      const result = await controller.remove(1);
       expect(mockBookService.remove).toHaveBeenCalledWith(1);
       expect(result).toEqual({ raw: [], affected: 1 });
     });
