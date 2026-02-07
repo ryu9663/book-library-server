@@ -1,5 +1,6 @@
 import { AbstractEntity } from 'src/common/entities/abstract.entity';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { Loan } from 'src/loan/entities/loan.entity';
 
 @Entity()
 export class User extends AbstractEntity {
@@ -8,4 +9,7 @@ export class User extends AbstractEntity {
 
   @Column({ unique: true })
   email: string;
+
+  @OneToMany(() => Loan, (loan) => loan.user)
+  loans: Loan[];
 }
