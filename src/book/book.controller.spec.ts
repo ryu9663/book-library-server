@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BookController } from './book.controller';
 import { BookService } from './book.service';
+import { Book } from './entities/book.entity';
 
 describe('BookController', () => {
   let controller: BookController;
   let mockBookService: jest.Mocked<BookService>;
 
-  const mockBooks = [
+  const mockBooks: Book[] = [
     {
       id: 1,
       title: '해리포터',
@@ -55,6 +56,50 @@ describe('BookController', () => {
       // Assert
       expect(mockBookService.findAll).toHaveBeenCalled();
       expect(result).toEqual(mockBooks);
+    });
+  });
+
+  describe('findOne', () => {
+    it('bookService.findOne을 호출하고 결과 반환', async () => {
+      mockBookService.findOne.mockResolvedValue(mockBooks[0]);
+
+      // Act
+      const result = await controller.findOne('1');
+
+      // Assert
+      expect(mockBookService.findOne).toHaveBeenCalledWith(1);
+      expect(result).toEqual(mockBooks[0]);
+    });
+  });
+
+  describe('patch', () => {
+    it('bookService.update호출하고 결과 반환', async () => {
+      mockBookService.update.mockResolvedValue({
+        ...mockBooks[0],
+        title: '수정된 책이름',
+      });
+
+      const result = await controller.update('1', {
+        title: '수정된 책이름',
+      });
+
+      expect(mockBookService.update).toHaveBeenCalledWith(1, {
+        title: '수정된 책이름',
+      });
+      expect(result).toEqual({
+        ...mockBooks[0],
+        title: '수정된 책이름',
+      });
+    });
+  });
+
+  describe('remove', () => {
+    it('bookService.remove 호출 결과 반환', async () => {
+      mockBookService.remove.mockResolvedValue({ raw: [], affected: 1 });
+
+      const result = await controller.remove('1');
+      expect(mockBookService.remove).toHaveBeenCalledWith(1);
+      expect(result).toEqual({ raw: [], affected: 1 });
     });
   });
 });

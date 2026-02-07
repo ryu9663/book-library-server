@@ -83,7 +83,7 @@ export class BookController {
   @Delete(':id')
   @ApiOkResponse({
     description: '삭제된 데이터 반환',
-    example: BOOK_EXAMPLE,
+    example: { affected: 1 },
   })
   @ApiNotFoundResponse({
     description: '책을 찾을 수 없음',
