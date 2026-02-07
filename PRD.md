@@ -26,6 +26,8 @@
 | author      | string  | 저자                  |
 | isbn        | string  | ISBN                  |
 | isAvailable | boolean | 대출 가능 여부 (true) |
+| createdAt   | Date    | 생성일 (자동)         |
+| updatedAt   | Date    | 수정일 (자동)         |
 
 #### API
 
@@ -56,7 +58,8 @@
 | id        | number | PK              |
 | name      | string | 이름            |
 | email     | string | 이메일 (unique) |
-| createdAt | Date   | 가입일          |
+| createdAt | Date   | 생성일 (자동)   |
+| updatedAt | Date   | 수정일 (자동)   |
 
 #### API
 
