@@ -1,0 +1,8 @@
+{
+  "PostToolUse": [
+    {
+      "matcher": { "tools": ["BashTool"] },
+      "hooks": [{ "type": "command", "command": "echo Done" }]
+    }
+  ]
+}
